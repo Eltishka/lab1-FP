@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  
+jobs:
+  test-fsharp:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 8.0.x
+        
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Install Fantomas
+      run: dotnet tool install fantomas --global
+
+    - name: Check formatting
+      run: fantomas --check .
+      
+    - name: Build
+      run: dotnet build --no-restore -warnaserror
+      
+    - name: Test
+      run: dotnet test tests/Tests.fsproj --no-build --verbosity normal --collect:"XPlat Code Coverage"
+      
+    - name: Extract coverage report
+      run: |
+        report_path=$(find . -type f -name 'coverage.cobertura.xml' | head -n 1)
+        echo "Report found: $report_path"
+        cp "$report_path" coverage.xml
+
+    - name: Upload coverage reports
+      uses: codecov/codecov-action@v3
+      with:
+        file: coverage.xml
+        fail_ci_if_error: false
+
+    - name: Run main program
+      run: dotnet run --no-build --project lab.fsproj

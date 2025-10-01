@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors>$(WarningsNotAsErrors)</WarningsAsErrors>
+    <NoWarn></NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="cycle\CycleTask1.fs" />
+    <Compile Include="cycle\CycleTask2.fs" />
+    <Compile Include="infinite\InfiniteTask1.fs" />
+    <Compile Include="infinite\InfiniteTask2.fs" />
+    <Compile Include="map\MapTask1.fs" />
+    <Compile Include="map\MapTask2.fs" />
+    <Compile Include="module\ModuleTask1.fs" />
+    <Compile Include="module\ModuleTask2.fs" />
+    <Compile Include="monolite\rec\RecTask1.fs" />
+    <Compile Include="monolite\rec\RecTask2.fs" />
+    <Compile Include="monolite\tailrec\TailrecTask1.fs" />
+    <Compile Include="monolite\tailrec\TailrecTask2.fs" />
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+
+</Project>

@@ -29,7 +29,7 @@ jobs:
       run: dotnet build --no-restore -warnaserror
       
     - name: Test
-      run: dotnet test tests/Tests.fsproj --no-build --verbosity normal --collect:"XPlat Code Coverage"
+      run: dotnet test tests/Tests.fsproj
       
     - name: Run main program
       run: dotnet run --no-build --project lab.fsproj

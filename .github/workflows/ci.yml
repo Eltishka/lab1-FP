@@ -31,17 +31,5 @@ jobs:
     - name: Test
       run: dotnet test tests/Tests.fsproj --no-build --verbosity normal --collect:"XPlat Code Coverage"
       
-    - name: Extract coverage report
-      run: |
-        report_path=$(find . -type f -name 'coverage.cobertura.xml' | head -n 1)
-        echo "Report found: $report_path"
-        cp "$report_path" coverage.xml
-
-    - name: Upload coverage reports
-      uses: codecov/codecov-action@v3
-      with:
-        file: coverage.xml
-        fail_ci_if_error: false
-
     - name: Run main program
       run: dotnet run --no-build --project lab.fsproj
